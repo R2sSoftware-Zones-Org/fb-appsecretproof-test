@@ -96,7 +96,10 @@ var getIdentity = function (accessToken) {
  
   try {
     return HTTP.get("https://graph.facebook.com/me", {
-      params: { appsecret_proof: hmac.digest('hex') }}).data;
+      params: {
+                    access_token: accessToken,
+                    appsecret_proof: hmac.digest('hex')
+              }}).data;
   } catch (err) {
     throw _.extend(new Error("Failed to fetch identity from Facebook. " + err.message),
                    {response: err.response});
